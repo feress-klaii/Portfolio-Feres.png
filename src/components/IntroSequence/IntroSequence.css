@@ -1,0 +1,186 @@
+.intro-track {
+  position: relative;
+}
+
+.intro-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* drifting decorative shapes — always moving, independent of scroll */
+.intro-shapes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.drift-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0.35;
+}
+
+.shape-1 {
+  width: 180px;
+  height: 180px;
+  top: 15%;
+  left: 12%;
+  background: radial-gradient(circle at 30% 30%, var(--cyan), transparent 70%);
+  animation: drift-a 14s ease-in-out infinite;
+}
+.shape-2 {
+  width: 120px;
+  height: 120px;
+  top: 60%;
+  left: 78%;
+  background: radial-gradient(circle at 30% 30%, var(--pink), transparent 70%);
+  animation: drift-b 18s ease-in-out infinite;
+}
+.shape-3 {
+  width: 90px;
+  height: 90px;
+  top: 75%;
+  left: 20%;
+  background: radial-gradient(circle at 30% 30%, var(--purple), transparent 70%);
+  animation: drift-c 16s ease-in-out infinite;
+}
+.shape-4 {
+  width: 220px;
+  height: 220px;
+  top: 8%;
+  left: 70%;
+  background: radial-gradient(circle at 30% 30%, var(--chrome-1), transparent 70%);
+  animation: drift-a 20s ease-in-out infinite reverse;
+}
+
+@keyframes drift-a {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(40px, 30px); }
+}
+@keyframes drift-b {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(-50px, -20px); }
+}
+@keyframes drift-c {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -40px); }
+}
+
+/* 3D cylinder stage */
+.intro-cylinder-stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  height: 320px;
+  perspective: 1400px;
+}
+
+.intro-cylinder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.intro-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  backface-visibility: hidden;
+  padding: var(--space-md);
+}
+
+.intro-small {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.4);
+  margin-bottom: var(--space-sm);
+}
+
+.intro-big {
+  font-family: 'Orbitron', var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  letter-spacing: 0.05em;
+  background: linear-gradient(
+    120deg,
+    var(--chrome-1) 0%,
+    var(--cyan) 20%,
+    var(--chrome-2) 40%,
+    var(--purple) 60%,
+    var(--pink) 80%,
+    var(--chrome-1) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: chrome-shift 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(0, 229, 255, 0.25));
+}
+
+@keyframes chrome-shift {
+  0%, 100% { background-position: 0% 0%; }
+  50% { background-position: 100% 0%; }
+}
+
+.intro-progress {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.progress-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.progress-dot.active {
+  background: var(--cyan);
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  z-index: 2;
+  animation: hint-pulse 2s ease-in-out infinite;
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 800px) {
+  .intro-cylinder-stage { height: 240px; }
+}

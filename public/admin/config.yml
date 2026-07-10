@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images"
+public_folder: "/images"
+
+collections:
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Role", name: "role", widget: "string" }
+      - { label: "Year", name: "year", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Cover Image", name: "cover", widget: "image" }
+      - { label: "Gallery Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Description", name: "description", widget: "text" }

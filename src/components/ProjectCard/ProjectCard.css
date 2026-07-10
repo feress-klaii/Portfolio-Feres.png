@@ -1,0 +1,132 @@
+.specimen {
+  position: relative;
+  cursor: pointer;
+  background: var(--bg-panel);
+  border: 1px solid var(--line);
+  padding: var(--space-xs);
+  overflow: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.specimen:hover {
+  border-color: var(--line-glow);
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.08);
+}
+
+.specimen.size-large { grid-column: span 4; }
+.specimen.size-medium { grid-column: span 3; }
+.specimen.size-small { grid-column: span 2; }
+
+/* bracket corners — flat/dim at rest, glow switches on with hover */
+.bracket {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  z-index: 3;
+  pointer-events: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.bracket-tl {
+  top: 6px;
+  left: 6px;
+  border-top: 1.5px solid var(--ink-faint);
+  border-left: 1.5px solid var(--ink-faint);
+}
+.bracket-br {
+  bottom: 6px;
+  right: 6px;
+  border-bottom: 1.5px solid var(--ink-faint);
+  border-right: 1.5px solid var(--ink-faint);
+}
+.specimen:hover .bracket-tl {
+  border-color: var(--cyan);
+  box-shadow: -2px -2px 10px var(--line-glow);
+}
+.specimen:hover .bracket-br {
+  border-color: var(--pink);
+  box-shadow: 2px 2px 10px rgba(255, 45, 120, 0.2);
+}
+
+/* iridescent glow bleed — dormant/invisible at rest, alive on hover */
+.specimen-bleed {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  background: radial-gradient(
+    circle at 100% 100%,
+    rgba(168, 85, 247, 0.25) 0%,
+    rgba(0, 229, 255, 0.18) 35%,
+    rgba(255, 45, 120, 0.12) 60%,
+    transparent 78%
+  );
+  transform: scale(0.6) translate(10%, 10%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.specimen:hover .specimen-bleed {
+  opacity: 1;
+  transform: scale(1.15) translate(0, 0);
+}
+
+.specimen-thumb {
+  position: relative;
+  z-index: 2;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg-panel-raised);
+}
+
+.specimen-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.9) contrast(1.05);
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.specimen:hover .specimen-thumb img {
+  transform: scale(1.04);
+  filter: saturate(1.1) contrast(1.1);
+}
+
+.specimen-meta {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-sm) var(--space-xs) var(--space-xs);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.specimen-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+.specimen-role {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* scroll-in state, controlled by ProjectGrid's IntersectionObserver */
+.specimen.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.specimen.pre-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+@media (max-width: 800px) {
+  .specimen.size-large,
+  .specimen.size-medium,
+  .specimen.size-small { grid-column: span 2; }
+}
