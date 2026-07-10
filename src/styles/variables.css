@@ -1,0 +1,25 @@
+:root{
+
+--bg:#050608;
+
+--surface:#0f1117;
+
+--text:#ffffff;
+
+--muted:#9fa6b2;
+
+--cyan:#00e5ff;
+
+--purple:#9d4edd;
+
+--pink:#ff2d78;
+
+--glass:rgba(255,255,255,.06);
+
+--glass-border:rgba(255,255,255,.12);
+
+--shadow:
+
+0 20px 80px rgba(0,0,0,.35);
+
+}

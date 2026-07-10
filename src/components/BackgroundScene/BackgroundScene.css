@@ -1,0 +1,278 @@
+.bg-scene{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:-5;
+}
+
+/* ---------------------------- */
+
+.bg-gradient{
+
+    position:absolute;
+    inset:-20%;
+
+    background:
+
+    radial-gradient(circle at 20% 20%,rgba(0,229,255,.08),transparent 40%),
+
+    radial-gradient(circle at 80% 40%,rgba(168,85,247,.08),transparent 35%),
+
+    radial-gradient(circle at 50% 90%,rgba(255,255,255,.04),transparent 45%);
+
+    animation:
+    gradientFloat 16s ease-in-out infinite alternate;
+}
+
+/* ---------------------------- */
+
+.bg-grid{
+
+    position:absolute;
+    inset:0;
+
+    background-image:
+
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+
+    background-size:90px 90px;
+
+    mask-image:
+    radial-gradient(circle at center,black 35%,transparent 100%);
+
+    opacity:.2;
+
+    transform:
+    perspective(1000px)
+    rotateX(78deg)
+    translateY(30%);
+}
+
+/* ---------------------------- */
+
+.bg-noise{
+
+    position:absolute;
+    inset:0;
+
+    opacity:.035;
+
+    background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+}
+
+/* ---------------------------- */
+
+.blob{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    filter:blur(70px);
+
+    mix-blend-mode:screen;
+}
+
+.blob-1{
+
+    width:420px;
+    height:420px;
+
+    left:5%;
+    top:10%;
+
+    background:#00e5ff33;
+
+    animation:floatOne 14s ease-in-out infinite;
+}
+
+.blob-2{
+
+    width:520px;
+    height:520px;
+
+    right:5%;
+    top:20%;
+
+    background:#a855f722;
+
+    animation:floatTwo 18s ease-in-out infinite;
+}
+
+.blob-3{
+
+    width:480px;
+    height:480px;
+
+    left:40%;
+    bottom:-10%;
+
+    background:#ffffff12;
+
+    animation:floatThree 22s ease-in-out infinite;
+}
+
+/* ---------------------------- */
+
+.ring{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(4px);
+}
+
+.ring-1{
+
+    width:360px;
+    height:360px;
+
+    top:8%;
+    right:10%;
+
+    animation:spinSlow 60s linear infinite;
+}
+
+.ring-2{
+
+    width:540px;
+    height:540px;
+
+    left:-120px;
+    bottom:-120px;
+
+    animation:spinSlowReverse 80s linear infinite;
+}
+
+/* ---------------------------- */
+
+.star{
+
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    background:white;
+
+    clip-path:polygon(
+50% 0%,
+61% 39%,
+100% 50%,
+61% 61%,
+50% 100%,
+39% 61%,
+0% 50%,
+39% 39%
+);
+
+    opacity:.25;
+}
+
+.star-1{
+
+left:22%;
+top:22%;
+animation:drift 9s ease-in-out infinite;
+}
+
+.star-2{
+
+right:18%;
+bottom:20%;
+animation:drift 13s ease-in-out infinite;
+}
+
+.star-3{
+
+left:72%;
+top:65%;
+animation:drift 16s ease-in-out infinite;
+}
+
+/* ---------------------------- */
+
+@keyframes gradientFloat{
+
+0%{
+
+transform:translate(0,0) scale(1);
+}
+
+100%{
+
+transform:translate(-2%,2%) scale(1.08);
+}
+
+}
+
+@keyframes floatOne{
+
+50%{
+
+transform:
+translateY(-70px)
+translateX(40px);
+}
+
+}
+
+@keyframes floatTwo{
+
+50%{
+
+transform:
+translateY(60px)
+translateX(-60px);
+}
+
+}
+
+@keyframes floatThree{
+
+50%{
+
+transform:
+translateY(-40px)
+translateX(50px);
+}
+
+}
+
+@keyframes spinSlow{
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+@keyframes spinSlowReverse{
+
+to{
+
+transform:rotate(-360deg);
+
+}
+
+}
+
+@keyframes drift{
+
+50%{
+
+transform:
+translateY(-20px)
+rotate(30deg);
+
+}
+
+}

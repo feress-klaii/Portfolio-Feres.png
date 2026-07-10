@@ -1,0 +1,43 @@
+/*.display-xl {
+    font-size: clamp(5rem, 10vw, 10rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    text-transform: uppercase;
+}
+
+.display-lg {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 800;
+    line-height: 1;
+}
+
+.display-md {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+}
+
+.label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.caption {
+    font-size: 0.75rem;
+    opacity: 0.6;
+}
+
+.eyebrow {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: var(--muted);
+}
+
+.mono {
+    font-family: "JetBrains Mono", monospace;
+    letter-spacing: 0.08em;
+}*/
