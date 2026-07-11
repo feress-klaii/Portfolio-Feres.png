@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import ProjectCard from "../ProjectCard/ProjectCard";
+import SectionLabel from "../Shared/SectionLabel";
 import "./ProjectGrid.css";
 
 // Staggered scroll reveal: each card observes its own visibility and

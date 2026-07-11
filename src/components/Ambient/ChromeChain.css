@@ -1,0 +1,23 @@
+.chrome-chain {
+  position: absolute;
+  display: flex;
+  pointer-events: none;
+}
+
+.chrome-chain.vertical { flex-direction: column; align-items: center; }
+.chrome-chain.horizontal { flex-direction: row; align-items: center; }
+
+.chrome-link {
+  border-radius: 50%;
+  border: 2px solid var(--glass-border);
+  margin: -4px 0;
+
+  /* .chrome already sets animation-name: chromeShift — this rule
+     adds drift alongside it rather than overwriting it */
+  animation-name: chromeShift, drift;
+  animation-duration: 8s, 4s;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+.chrome-chain.horizontal .chrome-link { margin: 0 -4px; }

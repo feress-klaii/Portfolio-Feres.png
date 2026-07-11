@@ -1,0 +1,4 @@
+.glass-panel {
+  border-radius: 18px;
+  padding: var(--space-lg);
+}

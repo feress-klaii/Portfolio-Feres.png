@@ -1,0 +1,17 @@
+.liquid-blob {
+  position: absolute;
+  filter: blur(1px);
+  pointer-events: none;
+
+  /* .iridescent already sets animation-name: iridescence — this
+     rule adds blobMorph alongside it rather than overwriting it */
+  animation-name: iridescence, blobMorph;
+  animation-duration: 8s, var(--morph-duration, 10s);
+  animation-timing-function: ease, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+@keyframes blobMorph {
+  0%, 100% { border-radius: 42% 58% 65% 35% / 45% 40% 60% 55%; }
+  50% { border-radius: 60% 40% 35% 65% / 55% 60% 40% 45%; }
+}

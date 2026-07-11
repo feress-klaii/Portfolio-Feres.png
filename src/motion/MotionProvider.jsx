@@ -1,30 +1,10 @@
-import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
-
+import "./lenis";
+ 
+// lenis.js self-initializes on import, so this provider's only job
+// is to guarantee that import happens before children render. Kept
+// as an explicit wrapper in App.jsx so it's obvious the app has
+// smooth-scroll active, rather than a silent side-effect import.
 export default function MotionProvider({ children }) {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.15,
-      smoothWheel: true,
-      smoothTouch: false,
-      wheelMultiplier: 1,
-      touchMultiplier: 1,
-    });
-
-    let raf;
-
-    function frame(time) {
-      lenis.raf(time);
-      raf = requestAnimationFrame(frame);
-    }
-
-    raf = requestAnimationFrame(frame);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      lenis.destroy();
-    };
-  }, []);
-
   return children;
 }
+ 

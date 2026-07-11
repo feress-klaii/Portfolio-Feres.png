@@ -1,0 +1,16 @@
+.identity-panel {
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+}
+
+.identity-heading {
+  margin-bottom: var(--space-sm);
+  color: var(--ink);
+}
+
+.identity-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}

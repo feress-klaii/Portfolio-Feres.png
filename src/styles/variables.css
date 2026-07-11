@@ -1,25 +1,52 @@
-:root{
+:root {
+  /* ---- core surfaces & text ---- */
+  --bg: #050608;
+  --surface: #0f1117;
+  --surface-raised: #161a24;
+  --text: #ffffff;
+  --muted: #9fa6b2;
 
---bg:#050608;
+  /* aliases used across existing components — keep both naming
+     schemes pointed at one source instead of maintaining two */
+  --bg-void: var(--bg);
+  --bg-panel: var(--surface);
+  --bg-panel-raised: var(--surface-raised);
+  --ink: var(--text);
+  --ink-soft: var(--muted);
+  --ink-faint: #4a5162;
+  --line: #1c2233;
+  --line-glow: rgba(0, 245, 255, 0.15);
 
---surface:#0f1117;
+  /* ---- accent language ---- */
+  --cyan: #00e5ff;
+  --purple: #9d4edd;
+  --pink: #ff2d78;
+  --chrome-1: #b8bfcc;
+  --chrome-2: #ffffff;
+  --chrome-3: #7c8797;
 
---text:#ffffff;
+  /* ---- materials ---- */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-highlight: rgba(255, 255, 255, 0.18);
+  --shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
 
---muted:#9fa6b2;
+  /* ---- type ---- */
+  --font-display: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
 
---cyan:#00e5ff;
+  /* ---- spacing scale ---- */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 2rem;
+  --space-lg: 4rem;
+  --space-xl: 8rem;
 
---purple:#9d4edd;
-
---pink:#ff2d78;
-
---glass:rgba(255,255,255,.06);
-
---glass-border:rgba(255,255,255,.12);
-
---shadow:
-
-0 20px 80px rgba(0,0,0,.35);
-
+  /* ---- shared motion language ----
+     Per the motion spec: one consistent rhythm, no random
+     durations. Every component should pull timing from here. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-short: 300ms;
+  --dur-medium: 650ms;
+  --dur-scene: 1100ms;
 }
