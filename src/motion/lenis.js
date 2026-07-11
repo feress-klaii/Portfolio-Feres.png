@@ -1,41 +1,29 @@
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 
-let lenis;
-let rafId;
+let lenis = null;
 
-function animate(time) {
-    lenis?.raf(time);
-    rafId = requestAnimationFrame(animate);
+function start() {
+  if (typeof window === "undefined" || lenis) return;
+
+  lenis = new Lenis({
+    duration: 1.15,
+    smoothWheel: true,
+    smoothTouch: false,
+    wheelMultiplier: 1,
+    touchMultiplier: 1,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
 }
 
-export function initLenis() {
-
-    if (lenis) return lenis;
-
-    lenis = new Lenis({
-        duration:1.15,
-        smoothWheel:true,
-        smoothTouch:false,
-        wheelMultiplier:1,
-        touchMultiplier:1
-    });
-
-    rafId = requestAnimationFrame(animate);
-
-    return lenis;
-}
+// Starts immediately on first import — components can rely on
+// getLenis() being ready without caring about mount order.
+start();
 
 export function getLenis() {
-    return lenis;
-}
-
-export function destroyLenis(){
-
-    if(!lenis) return;
-
-    cancelAnimationFrame(rafId);
-
-    lenis.destroy();
-
-    lenis=null;
+  return lenis;
 }

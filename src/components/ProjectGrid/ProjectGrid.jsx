@@ -35,10 +35,7 @@ function ProjectGrid({ projects, onOpenProject }) {
 
   return (
     <section className="work wrap" id="work">
-      <div className="section-label">
-        <span className="section-label-glow"></span>
-        Selected Work
-      </div>
+      <SectionLabel>Selected Work</SectionLabel>
       <div className="specimen-grid">
         {projects.map((project, i) => (
           <ProjectCard

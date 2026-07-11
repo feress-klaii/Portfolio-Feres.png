@@ -1,0 +1,13 @@
+.y2k-sprite {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 0 6px currentColor);
+  animation-name: rotateSlow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.y2k-sprite.spiral,
+.y2k-sprite.atom {
+  animation-direction: reverse;
+}

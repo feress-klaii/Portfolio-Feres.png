@@ -1,0 +1,25 @@
+.glass-blob {
+  position: absolute;
+  pointer-events: none;
+  filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.25)) drop-shadow(0 25px 45px rgba(0, 0, 0, 0.4)) saturate(1.3);
+  animation-name: floatSlow;
+  animation-duration: 8s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.glass-blob-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation-name: blobSpin;
+  animation-duration: var(--spin-duration, 13s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes blobSpin {
+  0% { transform: rotate(0deg) scale(1); filter: hue-rotate(0deg); }
+  50% { transform: rotate(180deg) scale(1.06); filter: hue-rotate(30deg); }
+  100% { transform: rotate(360deg) scale(1); filter: hue-rotate(0deg); }
+}

@@ -1,8 +1,13 @@
 .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--space-md) 0;
+  padding: var(--space-sm) var(--space-md);
 }
 
 .site-name {
@@ -25,7 +30,7 @@
 .site-header nav a {
   position: relative;
   padding-bottom: 2px;
-  transition: color 0.2s ease;
+  transition: color var(--dur-short) var(--ease-out);
 }
 
 .site-header nav a::after {
@@ -37,71 +42,11 @@
   height: 1px;
   background: var(--cyan);
   box-shadow: 0 0 6px var(--cyan);
-  transition: width 0.25s ease;
+  transition: width var(--dur-medium) var(--ease-out);
 }
 
-.site-header nav a:hover {
-  color: var(--ink);
-}
+.site-header nav a:hover { color: var(--ink); }
 .site-header nav a:hover::after { width: 100%; }
-
-.about {
-  padding: var(--space-lg) 0;
-  border-top: 1px solid var(--line);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-lg);
-}
-
-.about-heading {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 2.2rem;
-  color: var(--ink);
-}
-
-.about p {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  line-height: 1.7;
-  max-width: 55ch;
-  color: var(--ink-soft);
-}
-
-.site-footer {
-  padding: var(--space-lg) 0;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  gap: var(--space-md);
-}
-
-.site-footer .big-link {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  color: var(--ink);
-  transition: color 0.2s ease, text-shadow 0.2s ease;
-}
-
-.site-footer .big-link:hover {
-  color: var(--cyan);
-  text-shadow: 0 0 20px rgba(0, 229, 255, 0.4);
-}
-
-.site-footer .socials {
-  display: flex;
-  gap: var(--space-md);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--ink-soft);
-}
-
-.site-footer .socials a:hover { color: var(--cyan); }
 
 /* project detail overlay */
 .overlay {
@@ -169,6 +114,5 @@
 }
 
 @media (max-width: 800px) {
-  .about { grid-template-columns: 1fr; }
   .site-header nav { gap: var(--space-sm); }
 }

@@ -1,55 +1,53 @@
-*,
-*::before,
-*::after{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* NOTE: no `scroll-behavior: smooth` here — Lenis owns all scroll
+   smoothing. Having both active causes them to fight: native CSS
+   smoothing interpolates on its own timer while Lenis interpolates
+   via rAF, producing a lag-then-jump stutter. */
+html, body, #root { width: 100%; min-height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.5;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
-html{
-    scroll-behavior:smooth;
+/* near-invisible scanline texture — signals "system", stays subtle */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 229, 255, 0.012) 0px,
+    rgba(0, 229, 255, 0.012) 1px,
+    transparent 1px,
+    transparent 3px
+  );
 }
 
-html,
-body,
-#root{
-    width:100%;
-    min-height:100%;
+img { display: block; max-width: 100%; }
+button { font: inherit; border: none; background: none; cursor: pointer; color: inherit; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
 }
 
-body{
-    background:var(--bg);
-
-    color:var(--text);
-
-    font-family:Inter,sans-serif;
-
-    overflow-x:hidden;
-
-    text-rendering:optimizeLegibility;
-
-    -webkit-font-smoothing:antialiased;
-
-    -moz-osx-font-smoothing:grayscale;
-}
-
-img{
-    display:block;
-    width:100%;
-}
-
-button{
-    font:inherit;
-    border:none;
-    background:none;
-    cursor:pointer;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-ul{
-    list-style:none;
-}
+/* thin, on-theme scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--cyan); }

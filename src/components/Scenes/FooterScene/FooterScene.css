@@ -1,0 +1,31 @@
+.footer-scene {
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.footer-big-link {
+  color: var(--ink);
+  transition: color var(--dur-medium) var(--ease-out), text-shadow var(--dur-medium) var(--ease-out);
+}
+
+.footer-big-link:hover {
+  color: var(--cyan);
+  text-shadow: 0 0 24px rgba(0, 229, 255, 0.4);
+}
+
+.footer-socials {
+  display: flex;
+  gap: var(--space-md);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+.footer-socials a {
+  transition: color var(--dur-short) var(--ease-out);
+}
+
+.footer-socials a:hover {
+  color: var(--cyan);
+}
