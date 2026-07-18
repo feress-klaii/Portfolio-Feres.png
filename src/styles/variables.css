@@ -31,6 +31,11 @@
   --glass-highlight: rgba(255, 255, 255, 0.18);
   --shadow: 0 20px 80px rgba(0, 0, 0, 0.35);
 
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
   /* ---- type ---- */
   --font-display: 'Rajdhani', sans-serif;
   --font-mono: 'Share Tech Mono', monospace;

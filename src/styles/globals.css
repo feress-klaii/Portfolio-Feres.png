@@ -51,3 +51,12 @@ ul { list-style: none; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+/* The single stage everything renders inside — ViewContext runs the
+   spin transition against this element when navigating between
+   landing / works / work-detail. */
+.view-stage {
+  position: relative;
+  transform-origin: center center;
+  will-change: transform, filter, opacity;
+}

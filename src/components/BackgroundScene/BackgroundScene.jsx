@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import "./BackgroundScene.css";
 import { onScrollY } from "../../motion/scrollTicker";
+import { useView } from "../../motion/ViewContext";
 import ChromeRing from "../Ambient/ChromeRing";
-import GothicChain from "../Ambient/GothicChain";
 import GlassBlob from "../Ambient/GlassBlob";
 import Y2KSprite from "../Ambient/Y2KSprite";
+import HoloChain from "../Ambient/HoloChain";
 
 // Anchor zones spread across the viewport — a respawning shape picks
 // a fresh one each cycle so the field never repeats the same
@@ -30,19 +31,16 @@ function randomOf(arr) {
 // A slot's full visual descriptor is randomized fresh on every
 // respawn: kind, position, size, color, speed (parallax depth), and
 // how long it lives before fading out again.
-function rollDescriptor() {
+function rollDescriptor(allowBlob = true) {
   const roll = Math.random();
   const zone = ZONES[Math.floor(Math.random() * ZONES.length)];
   const speed = 0.05 + Math.random() * 0.28;
   const life = 7000 + Math.random() * 7000;
 
-  if (roll < 0.12) {
-    return { kind: "chain", ...zone, speed, life, size: 20 + Math.random() * 10, links: 4 + Math.floor(Math.random() * 3) };
-  }
-  if (roll < 0.24) {
+  if (allowBlob && roll < 0.14) {
     return { kind: "blob", ...zone, speed, life, size: 140 + Math.random() * 140 };
   }
-  if (roll < 0.32) {
+  if (roll < 0.28) {
     return { kind: "ring", ...zone, speed, life, size: 90 + Math.random() * 110 };
   }
   return {
@@ -58,8 +56,6 @@ function rollDescriptor() {
 
 function renderShape(d) {
   switch (d.kind) {
-    case "chain":
-      return <GothicChain links={d.links} size={d.size} vertical opacity={0.22} />;
     case "blob":
       return <GlassBlob size={d.size} />;
     case "ring":
@@ -71,11 +67,18 @@ function renderShape(d) {
   }
 }
 
-function FloatingSlot({ slotIndex }) {
-  const [descriptor, setDescriptor] = useState(rollDescriptor);
+function FloatingSlot({ slotIndex, allowBlob }) {
+  const [descriptor, setDescriptor] = useState(() => rollDescriptor(allowBlob));
   const [visible, setVisible] = useState(false);
   const outerRef = useRef(null);
   const timers = useRef([]);
+
+  // keep a live ref so the timer chain below (mount-only effect)
+  // always reads the current allowBlob without needing to restart
+  const allowBlobRef = useRef(allowBlob);
+  useEffect(() => {
+    allowBlobRef.current = allowBlob;
+  }, [allowBlob]);
 
   useEffect(() => {
     const activeTimers = timers.current;
@@ -89,7 +92,7 @@ function FloatingSlot({ slotIndex }) {
           setVisible(false);
           activeTimers.push(
             setTimeout(() => {
-              const next = rollDescriptor();
+              const next = rollDescriptor(allowBlobRef.current);
               setDescriptor(next);
               requestAnimationFrame(() => setVisible(true));
               scheduleCycle(next.life);
@@ -105,6 +108,24 @@ function FloatingSlot({ slotIndex }) {
     return () => activeTimers.forEach(clearTimeout);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // if blobs just became disallowed and this slot is currently
+  // showing one, swap it out right away rather than waiting out its
+  // full lifespan — the spin transition usually masks this anyway
+  useEffect(() => {
+    if (!allowBlob && descriptor.kind === "blob") {
+      const hideTimer = setTimeout(() => setVisible(false), 0);
+      const swapTimer = setTimeout(() => {
+        setDescriptor(rollDescriptor(false));
+        requestAnimationFrame(() => setVisible(true));
+      }, 500);
+      return () => {
+        clearTimeout(hideTimer);
+        clearTimeout(swapTimer);
+      };
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allowBlob]);
 
   // Parallax depth: written every real scroll frame, combined with
   // this slot's own drift animation which lives on the inner element
@@ -131,6 +152,9 @@ function FloatingSlot({ slotIndex }) {
 }
 
 function BackgroundScene() {
+  const { view } = useView();
+  const isLanding = view.name === "landing";
+
   const gradientRef = useRef(null);
   const mouseTarget = useRef({ x: 0, y: 0 });
   const mouseCurrent = useRef({ x: 0, y: 0 });
@@ -165,13 +189,16 @@ function BackgroundScene() {
   }, []);
 
   return (
-    <div className="bg-scene">
+    <div className={`bg-scene${isLanding ? "" : " bg-glitch"}`}>
       <div className="bg-gradient" ref={gradientRef}></div>
       <div className="bg-grid"></div>
       <div className="bg-noise"></div>
 
+      <HoloChain corner="top-left" radius={230} linkSize={54} linkCount={16} opacity={0.65} reverse={false} speedFactor={1} />
+      <HoloChain corner="top-right" radius={260} linkSize={60} linkCount={17} opacity={0.6} reverse={true} speedFactor={0.85} hue={130} />
+
       {Array.from({ length: 11 }).map((_, i) => (
-        <FloatingSlot key={i} slotIndex={i} />
+        <FloatingSlot key={i} slotIndex={i} allowBlob={isLanding} />
       ))}
     </div>
   );

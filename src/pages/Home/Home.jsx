@@ -1,30 +1,25 @@
-import { useState } from "react";
+import { ViewProvider } from "../../motion/ViewContext";
 import BackgroundScene from "../../components/BackgroundScene/BackgroundScene";
 import CursorGlow from "../../components/CursorGlow/CursorGlow";
 import LandingScene from "../../components/Scenes/LandingScene/LandingScene";
 import IdentityScene from "../../components/Scenes/IdentityScene/IdentityScene";
 import IntroSequence from "../../components/IntroSequence/IntroSequence";
-import ProjectGrid from "../../components/ProjectGrid/ProjectGrid";
+import WorkPreview from "../../components/WorkPreview/WorkPreview";
 import FooterScene from "../../components/Scenes/FooterScene/FooterScene";
-import PROJECTS from "../../data/projects";
+import WorksPage from "../WorksPage/WorksPage";
+import WorkDetailPage from "../WorkDetail/WorkDetailPage";
 import "./Home.css";
 
 // Scene order per the target structure:
-// Landing -> Identity -> Transition -> Gallery -> Footer
-// IntroSequence is the Transition Scene (the approved rotating-
-// cylinder walkthrough). Gallery is still card-based for now —
-// the museum-exhibit redesign is the next scoped piece of work,
-// not bundled in here.
+// Landing -> Identity -> Transition -> Gallery(preview) -> Footer
+// IntroSequence is the Transition Scene. WorkPreview is the landing
+// sneak peek; "View All Work" and any individual piece hand off to
+// the Works page / a work's own page via the spin transition — no
+// router, all one page swapping what it renders (see ViewContext).
 
-function Home() {
-  const [openId, setOpenId] = useState(null);
-  const openProject = PROJECTS.find((p) => p.id === openId);
-
+function LandingPage() {
   return (
     <>
-      <BackgroundScene />
-      <CursorGlow />
-
       <header className="site-header wrap">
         <div className="site-name">Feres</div>
         <nav>
@@ -37,28 +32,29 @@ function Home() {
       <LandingScene />
       <IdentityScene />
       <IntroSequence />
-      <ProjectGrid projects={PROJECTS} onOpenProject={setOpenId} />
+      <WorkPreview />
       <FooterScene />
-
-      {openProject && (
-        <div className="overlay open" onClick={() => setOpenId(null)}>
-          <div className="overlay-inner" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={() => setOpenId(null)}>← Back</button>
-            <h2>{openProject.title}</h2>
-            <div className="overlay-meta">
-              <span>{openProject.role}</span>
-              <span>{openProject.year}</span>
-            </div>
-            <p className="overlay-desc">{openProject.description}</p>
-            <div className="overlay-images">
-              {openProject.images.map((src) => (
-                <img key={src} src={src} alt={openProject.title} />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </>
+  );
+}
+
+function renderView(view) {
+  switch (view.name) {
+    case "works":
+      return <WorksPage />;
+    case "work":
+      return <WorkDetailPage id={view.id} />;
+    default:
+      return <LandingPage />;
+  }
+}
+
+function Home() {
+  return (
+    <ViewProvider renderView={renderView}>
+      <BackgroundScene />
+      <CursorGlow />
+    </ViewProvider>
   );
 }
 

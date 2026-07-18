@@ -22,6 +22,14 @@
   animation: chromeShift 8s linear infinite;
 }
 
+/* Use together with .chrome, e.g. class="chrome chrome-text", to
+   clip the same animated gradient to text instead of a panel fill. */
+.chrome-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .iridescent {
   background: linear-gradient(
     120deg,
@@ -32,6 +40,13 @@
   );
   background-size: 300%;
   animation: iridescence 8s ease infinite;
+}
+
+/* Use together with .iridescent for gradient-clipped headings/labels. */
+.iridescent-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 @keyframes chromeShift {

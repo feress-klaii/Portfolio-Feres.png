@@ -1,7 +1,6 @@
 import Scene from "../../Scene/Scene";
 import GlassPanel from "../../Shared/GlassPanel";
 import SectionLabel from "../../Shared/SectionLabel";
-import GothicChain from "../../Ambient/GothicChain";
 import GlassBlob from "../../Ambient/GlassBlob";
 import "./IdentityScene.css";
 
@@ -9,7 +8,6 @@ function IdentityScene() {
   return (
     <Scene id="about" className="identity-scene">
       <GlassBlob size={300} top="18%" left="66%" duration={14} />
-      <GothicChain links={5} size={26} top="12%" left="90%" opacity={0.26} />
 
       <GlassPanel className="identity-panel">
         <SectionLabel>Identity</SectionLabel>
