@@ -35,3 +35,10 @@
 .works-grid {
   margin-top: var(--space-md);
 }
+
+.works-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-lg);
+  scroll-margin-top: var(--space-lg);
+}

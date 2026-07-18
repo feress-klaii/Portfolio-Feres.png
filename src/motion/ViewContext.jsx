@@ -1,11 +1,20 @@
 /* eslint-disable react-refresh/only-export-components -- context + hook pair is intentional */
 import { createContext, useContext, useRef, useState, useCallback } from "react";
 import { animate } from "animejs";
+import { getLenis } from "./lenis";
 
 const ViewCtx = createContext(null);
 
 const SPIN_OUT_MS = 340;
 const SPIN_IN_MS = 380;
+
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const lenis = getLenis();
+  if (lenis) lenis.scrollTo(el, { duration: 1.1 });
+  else el.scrollIntoView({ behavior: "smooth" });
+}
 
 /**
  * Owns which "page" is showing (`{ name, id }`) and the stage element
@@ -14,14 +23,19 @@ const SPIN_IN_MS = 380;
  * blurred/rotated away, so the swap is invisible), then spins the new
  * content in. No router, no URL change — this is a single page that
  * changes what it's showing.
+ *
+ * Pass `{ anchor: 'some-id' }` to scroll to an element within the new
+ * view once the spin-in finishes (e.g. landing on the Works page
+ * already scrolled to its Collections section).
  */
 export function ViewProvider({ renderView, children }) {
   const [view, setView] = useState({ name: "landing", id: null });
   const stageRef = useRef(null);
   const busyRef = useRef(false);
 
-  const navigate = useCallback((name, id = null) => {
+  const navigate = useCallback((name, id = null, opts = {}) => {
     if (busyRef.current) return;
+    const { anchor } = opts;
     const el = stageRef.current;
     if (!el) {
       setView({ name, id });
@@ -55,6 +69,10 @@ export function ViewProvider({ renderView, children }) {
             ease: "outExpo",
             onComplete: () => {
               busyRef.current = false;
+              if (anchor) {
+                // give the new view a frame to lay out before measuring it
+                requestAnimationFrame(() => scrollToId(anchor));
+              }
             },
           });
         });
@@ -63,7 +81,7 @@ export function ViewProvider({ renderView, children }) {
   }, []);
 
   return (
-    <ViewCtx.Provider value={{ view, navigate }}>
+    <ViewCtx.Provider value={{ view, navigate, scrollToId }}>
       <div ref={stageRef} className="view-stage">
         {renderView(view)}
       </div>

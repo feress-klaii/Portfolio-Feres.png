@@ -92,6 +92,15 @@ export function getPublicWorks() {
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
+/** Public designs and public collections, each newest first, kept separate. */
+export function getPublicWorksSplit() {
+  const all = getPublicWorks();
+  return {
+    designs: all.filter((w) => w.type === "design"),
+    collections: all.filter((w) => w.type === "collection"),
+  };
+}
+
 /** A single work (design or collection) by id, or undefined. */
 export function getWorkById(id) {
   return DESIGNS.find((d) => d.id === id) ?? COLLECTIONS.find((c) => c.id === id);

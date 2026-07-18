@@ -5,18 +5,21 @@ import LandingScene from "../../components/Scenes/LandingScene/LandingScene";
 import IdentityScene from "../../components/Scenes/IdentityScene/IdentityScene";
 import IntroSequence from "../../components/IntroSequence/IntroSequence";
 import WorkPreview from "../../components/WorkPreview/WorkPreview";
-import FooterScene from "../../components/Scenes/FooterScene/FooterScene";
+import ExploreScene from "../../components/Scenes/ExploreScene/ExploreScene";
 import WorksPage from "../WorksPage/WorksPage";
 import WorkDetailPage from "../WorkDetail/WorkDetailPage";
+import ContactPage from "../ContactPage/ContactPage";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import "./Home.css";
 
 // Scene order per the target structure:
-// Landing -> Identity -> Transition -> Gallery(preview) -> Footer
+// Landing -> Identity -> Transition -> Gallery(preview) -> Explore
 // IntroSequence is the Transition Scene. WorkPreview is the landing
-// sneak peek; "View All Work" and any individual piece hand off to
-// the Works page / a work's own page via the spin transition — no
-// router, all one page swapping what it renders (see ViewContext).
+// sneak peek; ExploreScene is the site directory that replaced the
+// old inline contact footer. "View All Work", any individual piece,
+// and "Contact" all hand off to their own page via the spin
+// transition — no router, all one page swapping what it renders
+// (see ViewContext).
 
 function LandingPage() {
   return (
@@ -26,8 +29,8 @@ function LandingPage() {
         <nav>
           <a href="#about">About</a>
           <a href="#work">Work</a>
-          <a href="#contact">Contact</a>
-          <ThemeToggle />
+          <a href="#explore">Explore</a>
+          <ThemeToggle className="theme-toggle--nav" />
         </nav>
       </header>
 
@@ -35,7 +38,7 @@ function LandingPage() {
       <IdentityScene />
       <IntroSequence />
       <WorkPreview />
-      <FooterScene />
+      <ExploreScene />
     </>
   );
 }
@@ -46,6 +49,8 @@ function renderView(view) {
       return <WorksPage />;
     case "work":
       return <WorkDetailPage id={view.id} />;
+    case "contact":
+      return <ContactPage />;
     default:
       return <LandingPage />;
   }
