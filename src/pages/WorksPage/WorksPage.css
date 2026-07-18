@@ -11,6 +11,13 @@
   margin-bottom: var(--space-lg);
 }
 
+.works-header-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .works-back {
   font-family: var(--font-mono);
   font-size: 0.8rem;

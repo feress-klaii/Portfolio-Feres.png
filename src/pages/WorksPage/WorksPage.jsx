@@ -1,4 +1,5 @@
 import WorkCard from "../../components/WorkCard/WorkCard";
+import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import { useView } from "../../motion/ViewContext";
 import { getPublicWorks } from "../../data/works";
 import "./WorksPage.css";
@@ -12,9 +13,12 @@ function WorksPage() {
   return (
     <div className="works-page wrap">
       <header className="works-header">
-        <button className="works-back" onClick={() => navigate("landing")}>
-          ← Feres
-        </button>
+        <div className="works-header-row">
+          <button className="works-back" onClick={() => navigate("landing")}>
+            ← Feres
+          </button>
+          <ThemeToggle />
+        </div>
         <h1 className="works-title display-lg chrome chrome-text">All Work</h1>
       </header>
 

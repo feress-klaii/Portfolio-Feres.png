@@ -8,6 +8,7 @@ import WorkPreview from "../../components/WorkPreview/WorkPreview";
 import FooterScene from "../../components/Scenes/FooterScene/FooterScene";
 import WorksPage from "../WorksPage/WorksPage";
 import WorkDetailPage from "../WorkDetail/WorkDetailPage";
+import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import "./Home.css";
 
 // Scene order per the target structure:
@@ -26,6 +27,7 @@ function LandingPage() {
           <a href="#about">About</a>
           <a href="#work">Work</a>
           <a href="#contact">Contact</a>
+          <ThemeToggle />
         </nav>
       </header>
 

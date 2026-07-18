@@ -5,6 +5,10 @@
   mix-blend-mode: screen;
 }
 
+[data-theme="light"] .holo-chain-corner {
+  mix-blend-mode: multiply;
+}
+
 .holo-chain-inner {
   position: relative;
   width: 100%;
@@ -16,6 +20,10 @@
   display: block;
   overflow: visible;
   filter: drop-shadow(0 0 8px rgba(0, 229, 255, 0.5)) drop-shadow(0 0 22px rgba(0, 229, 255, 0.25));
+}
+
+[data-theme="light"] .holo-chain-svg {
+  filter: drop-shadow(0 0 6px rgba(0, 145, 179, 0.55)) drop-shadow(0 0 16px rgba(0, 145, 179, 0.3));
 }
 
 .holo-chain-ghost {
@@ -37,6 +45,17 @@
   opacity: 0.4;
   border-radius: 50%;
   animation: holoScan 3.5s linear infinite;
+}
+
+[data-theme="light"] .holo-chain-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(18, 49, 77, 0.08) 0px,
+    rgba(18, 49, 77, 0.08) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  mix-blend-mode: multiply;
 }
 
 @keyframes holoScan {

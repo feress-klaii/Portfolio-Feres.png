@@ -1,4 +1,5 @@
 import WorkCard from "../../components/WorkCard/WorkCard";
+import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import { useView } from "../../motion/ViewContext";
 import { getWorkById, getCollectionDesigns, getDesignCollections } from "../../data/works";
 import "./WorkDetailPage.css";
@@ -14,7 +15,10 @@ function WorkDetailPage({ id }) {
   if (!work) {
     return (
       <div className="work-detail wrap">
-        <button className="works-back" onClick={() => navigate("works")}>← All Work</button>
+        <div className="work-detail-top-row">
+          <button className="works-back" onClick={() => navigate("works")}>← All Work</button>
+          <ThemeToggle />
+        </div>
         <p>That work could not be found.</p>
       </div>
     );
@@ -26,7 +30,10 @@ function WorkDetailPage({ id }) {
 
   return (
     <div className="work-detail wrap">
-      <button className="works-back" onClick={() => navigate("works")}>← All Work</button>
+      <div className="work-detail-top-row">
+        <button className="works-back" onClick={() => navigate("works")}>← All Work</button>
+        <ThemeToggle />
+      </div>
 
       <header className="work-detail-header">
         <span className="work-detail-type eyebrow">

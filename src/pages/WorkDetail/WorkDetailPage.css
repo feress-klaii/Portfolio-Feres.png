@@ -3,6 +3,12 @@
   padding-block: var(--space-xl) var(--space-2xl);
 }
 
+.work-detail-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .work-detail-header {
   max-width: 62ch;
   margin: var(--space-lg) 0 var(--space-lg);

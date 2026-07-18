@@ -33,6 +33,12 @@
   transform: perspective(1000px) rotateX(78deg) translateY(30%);
 }
 
+[data-theme="light"] .bg-grid {
+  background-image:
+    linear-gradient(rgba(18, 49, 77, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 49, 77, 0.06) 1px, transparent 1px);
+}
+
 /* Inline SVG turbulence noise — no external network dependency. */
 .bg-noise {
   position: absolute;

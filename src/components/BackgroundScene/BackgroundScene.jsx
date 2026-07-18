@@ -22,7 +22,7 @@ const ZONES = [
 ];
 
 const SPRITE_VARIANTS = ["spark", "sparkFat", "burst", "ring", "ringCluster", "spiral", "atom", "heart", "diamond", "dots"];
-const COLORS = ["var(--cyan)", "var(--pink)", "var(--purple)", "#ffffff"];
+const COLORS = ["var(--cyan)", "var(--pink)", "var(--purple)", "var(--ink)"];
 
 function randomOf(arr) {
   return arr[Math.floor(Math.random() * arr.length)];

@@ -19,6 +19,7 @@
 
 .site-header nav {
   display: flex;
+  align-items: center;
   gap: var(--space-md);
   font-family: var(--font-mono);
   font-size: 0.75rem;

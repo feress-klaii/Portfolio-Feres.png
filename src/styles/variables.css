@@ -46,6 +46,7 @@
   --space-md: 2rem;
   --space-lg: 4rem;
   --space-xl: 8rem;
+  --space-2xl: 12rem;
 
   /* ---- shared motion language ----
      Per the motion spec: one consistent rhythm, no random
@@ -54,4 +55,38 @@
   --dur-short: 300ms;
   --dur-medium: 650ms;
   --dur-scene: 1100ms;
+}
+
+/* ==========================================================
+   LIGHT THEME — "blueprint vellum": pale blue-gray paper, deep
+   navy ink, richer accent hues so they stay legible (and still
+   glow) against a light backdrop instead of washing out.
+   Toggled via data-theme="light" on <html> (see motion/theme.js).
+   ========================================================== */
+[data-theme="light"] {
+  --bg: #dce6f0;
+  --surface: #e6eef6;
+  --surface-raised: #eef4fa;
+  --text: #12314d;
+  --muted: #4d6a85;
+  --ink-faint: #93aac0;
+  --line: #a9c2d8;
+  --line-glow: rgba(0, 120, 180, 0.18);
+
+  /* richer/deeper than the dark-mode accents so they hold contrast
+     against a light backdrop instead of going pale */
+  --cyan: #0091b3;
+  --purple: #7c3fc4;
+  --pink: #d81b60;
+
+  /* dark steel instead of white/light-gray — on a light backdrop a
+     bright chrome gradient would disappear into the page */
+  --chrome-1: #4a5a6e;
+  --chrome-2: #1c2b3d;
+  --chrome-3: #7f93a8;
+
+  --glass-bg: rgba(18, 49, 77, 0.04);
+  --glass-border: rgba(18, 49, 77, 0.14);
+  --glass-highlight: rgba(255, 255, 255, 0.5);
+  --shadow: 0 20px 60px rgba(30, 60, 90, 0.14);
 }
