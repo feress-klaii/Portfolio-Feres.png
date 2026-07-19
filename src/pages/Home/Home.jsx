@@ -10,6 +10,7 @@ import WorksPage from "../WorksPage/WorksPage";
 import WorkDetailPage from "../WorkDetail/WorkDetailPage";
 import ContactPage from "../ContactPage/ContactPage";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
+import SiteFooter from "../../components/SiteFooter/SiteFooter";
 import "./Home.css";
 
 // Scene order per the target structure:
@@ -44,16 +45,26 @@ function LandingPage() {
 }
 
 function renderView(view) {
+  let page;
   switch (view.name) {
     case "works":
-      return <WorksPage />;
+      page = <WorksPage />;
+      break;
     case "work":
-      return <WorkDetailPage id={view.id} />;
+      page = <WorkDetailPage id={view.id} />;
+      break;
     case "contact":
-      return <ContactPage />;
+      page = <ContactPage />;
+      break;
     default:
-      return <LandingPage />;
+      page = <LandingPage />;
   }
+  return (
+    <>
+      {page}
+      <SiteFooter />
+    </>
+  );
 }
 
 function Home() {

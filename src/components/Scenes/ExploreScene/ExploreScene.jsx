@@ -27,7 +27,7 @@ function ExploreScene() {
           <li key={item.label}>
             <button className="explore-item" onClick={item.action}>
               <span className="explore-index mono">{String(i + 1).padStart(2, "0")}</span>
-              <span className="explore-label display-md chrome chrome-text">{item.label}</span>
+              <span className="explore-label chrome chrome-text">{item.label}</span>
               <span className="explore-arrow">→</span>
             </button>
           </li>

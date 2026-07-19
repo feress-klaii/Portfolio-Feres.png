@@ -28,12 +28,28 @@ function randomOf(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function clampPct(n) {
+  return Math.min(96, Math.max(4, n));
+}
+
+// Each slot has a fixed "home" zone (one-to-one with ZONES by index,
+// so with <= ZONES.length slots no two can ever land on the exact
+// same spot) and jitters a few percent around it on every respawn —
+// enough variation to feel alive without risking two shapes stacking
+// invisibly on top of each other.
+function jitteredZone(slotIndex) {
+  const home = ZONES[slotIndex % ZONES.length];
+  const top = clampPct(parseFloat(home.top) + (Math.random() - 0.5) * 8);
+  const left = clampPct(parseFloat(home.left) + (Math.random() - 0.5) * 8);
+  return { top: `${top}%`, left: `${left}%` };
+}
+
 // A slot's full visual descriptor is randomized fresh on every
 // respawn: kind, position, size, color, speed (parallax depth), and
 // how long it lives before fading out again.
-function rollDescriptor(allowBlob = true) {
+function rollDescriptor(slotIndex, allowBlob = true) {
   const roll = Math.random();
-  const zone = ZONES[Math.floor(Math.random() * ZONES.length)];
+  const zone = jitteredZone(slotIndex);
   const speed = 0.05 + Math.random() * 0.28;
   const life = 7000 + Math.random() * 7000;
 
@@ -68,7 +84,7 @@ function renderShape(d) {
 }
 
 function FloatingSlot({ slotIndex, allowBlob }) {
-  const [descriptor, setDescriptor] = useState(() => rollDescriptor(allowBlob));
+  const [descriptor, setDescriptor] = useState(() => rollDescriptor(slotIndex, allowBlob));
   const [visible, setVisible] = useState(false);
   const outerRef = useRef(null);
   const timers = useRef([]);
@@ -92,7 +108,7 @@ function FloatingSlot({ slotIndex, allowBlob }) {
           setVisible(false);
           activeTimers.push(
             setTimeout(() => {
-              const next = rollDescriptor(allowBlobRef.current);
+              const next = rollDescriptor(slotIndex, allowBlobRef.current);
               setDescriptor(next);
               requestAnimationFrame(() => setVisible(true));
               scheduleCycle(next.life);
@@ -116,7 +132,7 @@ function FloatingSlot({ slotIndex, allowBlob }) {
     if (!allowBlob && descriptor.kind === "blob") {
       const hideTimer = setTimeout(() => setVisible(false), 0);
       const swapTimer = setTimeout(() => {
-        setDescriptor(rollDescriptor(false));
+        setDescriptor(rollDescriptor(slotIndex, false));
         requestAnimationFrame(() => setVisible(true));
       }, 500);
       return () => {

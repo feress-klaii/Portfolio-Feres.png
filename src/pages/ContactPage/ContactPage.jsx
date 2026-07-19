@@ -15,7 +15,7 @@ function ContactPage() {
 
       <header className="contact-header">
         <span className="eyebrow">Say hello</span>
-        <h1 className="contact-title display-lg chrome chrome-text">Get in touch</h1>
+        <h1 className="contact-title chrome chrome-text">Get in touch</h1>
         <p className="contact-desc mono">
           Reachable through any of these — email is fastest.
         </p>
@@ -26,7 +26,7 @@ function ContactPage() {
           <li key={c.label}>
             <a className="contact-item" href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
               <span className={`contact-dot dot-${c.dot}`}></span>
-              <span className="contact-label display-md">{c.label}</span>
+              <span className="contact-label">{c.label}</span>
               <span className="contact-arrow">→</span>
             </a>
           </li>
