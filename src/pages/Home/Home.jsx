@@ -1,4 +1,4 @@
-import { ViewProvider } from "../../motion/ViewContext";
+import { ViewProvider, useView } from "../../motion/ViewContext";
 import BackgroundScene from "../../components/BackgroundScene/BackgroundScene";
 import CursorGlow from "../../components/CursorGlow/CursorGlow";
 import LandingScene from "../../components/Scenes/LandingScene/LandingScene";
@@ -20,17 +20,22 @@ import "./Home.css";
 // old inline contact footer. "View All Work", any individual piece,
 // and "Contact" all hand off to their own page via the spin
 // transition — no router, all one page swapping what it renders
-// (see ViewContext).
+// (see ViewContext). Every navigation trigger on the site — page
+// swaps via navigate() and in-page scrolls via goToSection() — plays
+// the same spin transition, so it's one consistent motion language
+// regardless of what's being clicked.
 
 function LandingPage() {
+  const { goToSection } = useView();
+
   return (
     <>
       <header className="site-header wrap">
         <div className="site-name">Feres</div>
         <nav>
-          <a href="#about">About</a>
-          <a href="#work">Work</a>
-          <a href="#explore">Explore</a>
+          <button onClick={() => goToSection("about")}>About</button>
+          <button onClick={() => goToSection("work")}>Work</button>
+          <button onClick={() => goToSection("explore")}>Explore</button>
           <ThemeToggle className="theme-toggle--nav" />
         </nav>
       </header>

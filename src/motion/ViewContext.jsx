@@ -80,8 +80,56 @@ export function ViewProvider({ renderView, children }) {
     });
   }, []);
 
+  /**
+   * Same spin-out/spin-in sequence as navigate(), but for staying on
+   * the current view and scrolling to an in-page anchor instead of
+   * swapping which page renders. Used by every same-page nav trigger
+   * (top nav links, the Explore list's Home/About items) so *every*
+   * navigation action on the site — page swap or in-page scroll —
+   * shares the identical transition.
+   */
+  const goToSection = useCallback((id) => {
+    if (busyRef.current) return;
+    const el = stageRef.current;
+    if (!el) {
+      scrollToId(id);
+      return;
+    }
+
+    busyRef.current = true;
+
+    animate(el, {
+      rotate: [0, -16],
+      scale: [1, 0.86],
+      filter: ["blur(0px)", "blur(18px)"],
+      opacity: [1, 0.35],
+      duration: SPIN_OUT_MS,
+      ease: "inExpo",
+      onComplete: () => {
+        scrollToId(id);
+        el.style.transform = "rotate(16deg) scale(0.86)";
+        el.style.filter = "blur(18px)";
+        el.style.opacity = "0.35";
+
+        requestAnimationFrame(() => {
+          animate(el, {
+            rotate: [16, 0],
+            scale: [0.86, 1],
+            filter: ["blur(18px)", "blur(0px)"],
+            opacity: [0.35, 1],
+            duration: SPIN_IN_MS,
+            ease: "outExpo",
+            onComplete: () => {
+              busyRef.current = false;
+            },
+          });
+        });
+      },
+    });
+  }, []);
+
   return (
-    <ViewCtx.Provider value={{ view, navigate, scrollToId }}>
+    <ViewCtx.Provider value={{ view, navigate, scrollToId, goToSection }}>
       <div ref={stageRef} className="view-stage">
         {renderView(view)}
       </div>

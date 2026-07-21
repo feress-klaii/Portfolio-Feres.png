@@ -1,0 +1,22 @@
+.singularity-holo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.singularity-canvas {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: none;
+}
+
+.singularity-canvas:active {
+  cursor: grabbing;
+}
+
+.singularity-canvas canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
