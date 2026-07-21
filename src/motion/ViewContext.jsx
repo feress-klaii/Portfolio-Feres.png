@@ -8,12 +8,31 @@ const ViewCtx = createContext(null);
 const SPIN_OUT_MS = 340;
 const SPIN_IN_MS = 380;
 
+// getBoundingClientRect() (which most scroll-to-element helpers use
+// internally) returns the element's *visually rendered* position —
+// including any CSS transform on an ancestor. Since goToSection/
+// navigate call this while .view-stage still has the spin-out's
+// rotate/scale transform applied, a rect-based measurement would be
+// distorted and land short. offsetTop is a pure layout property,
+// unaffected by transform on any ancestor, so it stays accurate
+// regardless of what the spin animation is doing visually.
+function getStableOffsetTop(el) {
+  let y = 0;
+  let node = el;
+  while (node) {
+    y += node.offsetTop || 0;
+    node = node.offsetParent;
+  }
+  return y;
+}
+
 function scrollToId(id) {
   const el = document.getElementById(id);
   if (!el) return;
+  const targetY = getStableOffsetTop(el);
   const lenis = getLenis();
-  if (lenis) lenis.scrollTo(el, { duration: 1.1 });
-  else el.scrollIntoView({ behavior: "smooth" });
+  if (lenis) lenis.scrollTo(targetY, { duration: 1.1 });
+  else window.scrollTo({ top: targetY, behavior: "smooth" });
 }
 
 /**
