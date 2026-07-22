@@ -1,8 +1,0 @@
-.gothic-chain-svg {
-  position: absolute;
-  pointer-events: none;
-  filter: blur(0.4px) drop-shadow(0 0 5px rgba(0, 229, 255, 0.18));
-  animation-name: drift;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}

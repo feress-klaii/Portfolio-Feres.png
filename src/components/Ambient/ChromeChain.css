@@ -1,8 +1,0 @@
-.chrome-chain-svg {
-  position: absolute;
-  pointer-events: none;
-  filter: drop-shadow(0 0 4px rgba(0, 229, 255, 0.15));
-  animation-name: drift;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
