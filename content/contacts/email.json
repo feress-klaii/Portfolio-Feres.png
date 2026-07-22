@@ -1,1 +1,6 @@
-{ "label": "Email", "href": "mailto:you@example.com", "dot": "cyan", "order": 0 }
+{
+  "label": "Email",
+  "href": "mailto:kasrfai@gmail.com",
+  "dot": "cyan",
+  "order": 0
+}
