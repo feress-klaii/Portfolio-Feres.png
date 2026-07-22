@@ -3,8 +3,8 @@ backend:
   repo: feress-klaii/Portfolio-Feres.png
   branch: main
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "public/images"
+public_folder: "/images"
 
 collections:
   - name: "designs"
