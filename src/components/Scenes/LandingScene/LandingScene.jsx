@@ -16,7 +16,7 @@ function LandingScene() {
       <h1 className="landing-name">
         <span className="landing-name-chrome chrome">FERES</span>
       </h1>
-      <p className="landing-tagline mono">— placeholder, real line TBD —</p>
+      <p className="landing-tagline mono">— Digital dreams, Translated visually —</p>
 
       <div className="landing-scroll-hint mono">scroll</div>
     </Scene>

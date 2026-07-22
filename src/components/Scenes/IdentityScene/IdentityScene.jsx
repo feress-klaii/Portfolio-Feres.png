@@ -11,11 +11,10 @@ function IdentityScene() {
 
       <GlassPanel className="identity-panel">
         <SectionLabel>Identity</SectionLabel>
-        <h2 className="identity-heading display-lg">A bit about you</h2>
+        <h2 className="identity-heading display-lg">A bit about me🦦 </h2>
         <p className="identity-body mono">
-          This is where your bio goes — background, what drives your work,
-          tools you use. Two or three short paragraphs is enough. Keep it
-          in your own voice.
+          I'm Fares, a graphic designer and Computer Science student with a passion for creating visuals that are both meaningful and memorable. I enjoy transforming ideas into designs that communicate clearly, capture attention, and leave a lasting impression.
+Whether it's branding, posters, album artwork, or digital experiences, I approach every project with creativity, curiosity, and attention to detail. I believe great design isn't just about how it looks—it's about how it connects, communicates, and solves problems.
         </p>
       </GlassPanel>
     </Scene>

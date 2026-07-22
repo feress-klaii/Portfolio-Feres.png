@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import WorkCard from "../WorkCard/WorkCard";
 import SectionLabel from "../Shared/SectionLabel";
 import { useView } from "../../motion/ViewContext";
-import { getPublicWorks } from "../../data/works";
+import { getFeaturedWorks } from "../../data/works";
 import "./WorkPreview.css";
 
 const SIZES = ["large", "medium", "medium", "small"];
@@ -14,7 +14,7 @@ const SIZES = ["large", "medium", "medium", "small"];
  */
 function WorkPreview() {
   const { navigate } = useView();
-  const works = getPublicWorks().slice(0, 4);
+  const works = getFeaturedWorks(4);
   const cardRefs = useRef([]);
   const [revealedIds, setRevealedIds] = useState(new Set());
 

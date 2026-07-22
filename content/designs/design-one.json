@@ -1,0 +1,11 @@
+{
+  "id": "design-one",
+  "type": "design",
+  "title": "Project Title",
+  "date": "2026-01-10",
+  "description": "A short description of the brief, your approach, and the outcome.",
+  "images": ["/images/placeholder-1.jpg"],
+  "references": [],
+  "featured": true,
+  "public": true
+}

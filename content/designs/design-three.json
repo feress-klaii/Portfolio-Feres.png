@@ -1,0 +1,11 @@
+{
+  "id": "design-three",
+  "type": "design",
+  "title": "Project Title",
+  "date": "2025-08-18",
+  "description": "Another short project description goes here.",
+  "images": ["/images/placeholder-3.jpg"],
+  "references": [],
+  "featured": true,
+  "public": true
+}

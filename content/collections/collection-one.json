@@ -1,0 +1,9 @@
+{
+  "id": "collection-one",
+  "type": "collection",
+  "title": "Collection Title",
+  "date": "2026-01-10",
+  "description": "A short description of what ties this collection together.",
+  "designIds": ["design-one", "design-two"],
+  "public": true
+}

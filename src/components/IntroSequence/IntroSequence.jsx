@@ -14,11 +14,12 @@ import "./IntroSequence.css";
 // `big` on each step with real copy once decided.
 
 const STEPS = [
-  { small: "Every project starts as a problem worth solving", big: "" },
-  { small: "Then it becomes a system of decisions", big: "" },
-  { small: "Type. Color. Rhythm. Restraint.", big: "" },
-  { small: "Some of it is loud. Most of it is quiet.", big: "" },
-  { small: "This is the work.", big: "" },
+  { small: "Every idea begins as static — noise waiting for a signal.", big: "" },
+  { small: "Before it's seen, it's felt — then built.", big: "" },
+  { small: "Then it resolves into form, pixel by pixel, decision by decision.", big: "" },
+  { small: "Some visions arrive loud. Most arrive as a whisper you have to chase.", big: "" },
+  { small: "What you see is the dream — refined until it holds.", big: "" },
+  { small: "This is where imagination gets rendered.", big: "" },
 ];
 
 const STEP_DEG = 360 / STEPS.length;
@@ -36,7 +37,7 @@ function IntroSequence() {
     if (!cylinder) return;
 
     const eased = easeInOutCubic(progress);
-    const totalRotation = eased * (360 - STEP_DEG) * (STEPS.length / (STEPS.length - 1));
+    const totalRotation = eased * (360 - STEP_DEG);
     cylinder.style.transform = `rotateX(${-totalRotation}deg)`;
 
     shapesRef.current.forEach((el, i) => {

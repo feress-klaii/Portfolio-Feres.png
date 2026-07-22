@@ -1,22 +1,73 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: feress-klaii/Portfolio-Feres
   branch: main
 
-media_folder: "public/images"
-public_folder: "/images"
+media_folder: "public/uploads"
+public_folder: "/uploads"
 
 collections:
-  - name: "projects"
-    label: "Projects"
-    folder: "content/projects"
+  - name: "designs"
+    label: "Works"
+    folder: "content/designs"
     create: true
     delete: true
+    format: "json"
     slug: "{{slug}}"
+    summary: "{{title}} — {{date}}"
     fields:
+      - { label: "ID", name: "id", widget: "hidden", default: "{{slug}}" }
+      - { label: "Type", name: "type", widget: "hidden", default: "design" }
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Role", name: "role", widget: "string" }
-      - { label: "Year", name: "year", widget: "string" }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Cover Image", name: "cover", widget: "image" }
-      - { label: "Gallery Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Description", name: "description", widget: "text" }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        field: { label: "Image", name: "image", widget: "image" }
+      - label: "Reference Images"
+        name: "references"
+        widget: "list"
+        required: false
+        field: { label: "Image", name: "image", widget: "image" }
+      - { label: "Featured on homepage", name: "featured", widget: "boolean", default: false, hint: "Controls what shows in the homepage preview." }
+      - { label: "Public", name: "public", widget: "boolean", default: true, hint: "Turn off to hide this from the Works page without deleting it." }
+
+  - name: "collections_group"
+    label: "Collections"
+    folder: "content/collections"
+    create: true
+    delete: true
+    format: "json"
+    slug: "{{slug}}"
+    summary: "{{title}}"
+    fields:
+      - { label: "ID", name: "id", widget: "hidden", default: "{{slug}}" }
+      - { label: "Type", name: "type", widget: "hidden", default: "collection" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Description", name: "description", widget: "text" }
+      - label: "Works in this collection"
+        name: "designIds"
+        widget: "relation"
+        collection: "designs"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+        multiple: true
+        required: false
+      - { label: "Public", name: "public", widget: "boolean", default: true, hint: "Turn off to hide this collection from the Works page." }
+
+  - name: "contacts"
+    label: "Contact Links"
+    folder: "content/contacts"
+    create: true
+    delete: true
+    format: "json"
+    slug: "{{slug}}"
+    summary: "{{label}}"
+    fields:
+      - { label: "Label", name: "label", widget: "string" }
+      - { label: "URL", name: "href", widget: "string", hint: "Use mailto: for email, full https:// links for everything else." }
+      - { label: "Accent Color", name: "dot", widget: "select", options: ["cyan", "pink", "purple"] }
+      - { label: "Order", name: "order", widget: "number", default: 0, value_type: "int", hint: "Lower numbers appear first." }
