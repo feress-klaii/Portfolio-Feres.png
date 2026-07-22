@@ -1,10 +1,12 @@
 {
   "id": "design-three",
   "type": "design",
-  "title": "Project Title",
+  "title": "Mantis",
   "date": "2025-08-18",
   "description": "Another short project description goes here.",
-  "images": ["/images/placeholder-3.jpg"],
+  "images": [
+    "/images/mantis2.png"
+  ],
   "references": [],
   "featured": true,
   "public": true
