@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: feress-klaii/Portfolio-Feres
+  repo: feress-klaii/Portfolio-Feres.png
   branch: main
 
 media_folder: "public/uploads"
