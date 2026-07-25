@@ -31,14 +31,17 @@ function start() {
   }
   requestAnimationFrame(raf);
 
-  // The only legitimate reason to recompute scroll bounds — an
-  // actual viewport resize, not content settling mid-scroll.
-  // Debounced so rapid resize events don't spam recalculation.
+  // Recalculate scroll bounds after content has been stable for
+  // 500ms — long enough that it never fires mid-scroll-gesture (the
+  // "pause then jump" bug), but still catches up shortly after
+  // images/content settle, so the scroll limit is never permanently
+  // stuck at whatever height existed when this ran (this file starts
+  // before React finishes rendering the full page).
   let resizeTimer;
-  window.addEventListener("resize", () => {
+  new ResizeObserver(() => {
     clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => lenis.resize(), 150);
-  });
+    resizeTimer = setTimeout(() => lenis.resize(), 500);
+  }).observe(document.body);
 }
 
 // Starts immediately on first import — components can rely on
