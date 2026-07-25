@@ -1,5 +1,4 @@
 import { forwardRef } from "react";
-import { optimizedImage } from "../../utils/imageUrl";
 import "./WorkCard.css";
 
 const WorkCard = forwardRef(function WorkCard({ work, onOpen, size = "medium", revealed = true }, ref) {
@@ -17,7 +16,7 @@ const WorkCard = forwardRef(function WorkCard({ work, onOpen, size = "medium", r
       <div className="specimen-bleed"></div>
 
       <div className="specimen-thumb">
-        {work.cover && <img src={optimizedImage(work.cover, { width: 700 })} alt={work.title} loading="lazy" />}
+        {work.cover && <img src={work.cover} alt={work.title} loading="lazy" />}
       </div>
 
       <div className="specimen-meta">
