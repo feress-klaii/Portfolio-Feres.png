@@ -2,7 +2,7 @@ import { readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
-const MAX_DIMENSION = 1600;
+const MAX_DIMENSION = 160000;
 const SKIP_UNDER_KB = 150;
 const TARGETS = ["images", "uploads"];
 
