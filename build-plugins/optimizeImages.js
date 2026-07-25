@@ -2,7 +2,7 @@ import { readdir, stat } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
-const MAX_DIMENSION = 160000;
+const MAX_DIMENSION = 2400;
 const SKIP_UNDER_KB = 150;
 const TARGETS = ["images", "uploads"];
 
@@ -62,11 +62,11 @@ export function optimizeImagesPlugin() {
             : img;
 
           if (ext === ".jpg" || ext === ".jpeg") {
-            pipeline = pipeline.jpeg({ quality: 80, mozjpeg: true });
+            pipeline = pipeline.jpeg({ quality: 92, mozjpeg: true });
           } else if (ext === ".png") {
-            pipeline = pipeline.png({ compressionLevel: 9, palette: true, quality: 82, effort: 8 });
+            pipeline = pipeline.png({ compressionLevel: 9 });
           } else if (ext === ".webp") {
-            pipeline = pipeline.webp({ quality: 80 });
+            pipeline = pipeline.webp({ quality: 90 });
           }
 
           const buffer = await pipeline.toBuffer();
