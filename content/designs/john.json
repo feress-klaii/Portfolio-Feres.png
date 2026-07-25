@@ -1,0 +1,13 @@
+{
+  "id": "john",
+  "type": "design",
+  "title": "John Wick",
+  "date": "2025-08-29",
+  "description": "A duotone John Wick poster built around a violet-and-crimson palette, using layered stills — a tense hallway confrontation, a candlelit standoff — unified by a shared color grade so the composite reads as one escalating scene rather than three cut-and-pasted images. The dripping gothic \"Baba Yaga\" lettering anchors the bottom third with real weight, playing off Wick's own nickname within the franchise, while the top-banner pull-quote in a contrasting serif gives the piece an editorial, lobby-card feel rather than a generic fan poster.",
+  "images": [
+    "/images/jowick11.JPEG"
+   ],
+  "references": [],
+  "featured": false,
+  "public": true
+}

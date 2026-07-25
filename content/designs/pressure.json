@@ -1,0 +1,14 @@
+{
+  "id": "pressure",
+  "type": "design",
+  "title": "'PRESSURE' Album Cover",
+  "date": "2022-08-09",
+  "description": "An album cover for ,a producer, Bumble Bee's album \"PRESSURE\".",
+  "images": [
+    "/images/GGG.jpg ",
+    "/images/11.jpg"
+  ],
+  "references": [],
+  "featured": false,
+  "public": true
+}

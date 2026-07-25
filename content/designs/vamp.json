@@ -1,0 +1,11 @@
+{
+  "id": "Vamp",
+  "type": "design",
+  "title": "Vamp",
+  "date": "2026-06-03",
+  "description": "A high-contrast, halftone-grain portrait treatment — sepia and magenta duotone standing in for the traditional horror-poster palette without leaning on literal red. The vertical gothic wordmark running up the left edge keeps the type out of the subject's way entirely, letting the photograph's own tension (the parted lips, the raised hands) carry the piece. Grain and scratch texture throughout sell the 'found artifact' read rather than a clean digital render.",
+  "images": ["/images/vampp.png"],
+  "references": [],
+  "featured": false,
+  "public": true
+}

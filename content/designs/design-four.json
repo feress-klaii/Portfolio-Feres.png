@@ -5,10 +5,9 @@
   "date": "2025-06-04",
   "description": "Another short project description goes here.",
   "images": [
-    "/images/RASMETMESSI.jpeg",
-    "/images/placeholder-1.jpg"
+    "/images/RASMETMESSI.jpeg"
   ],
   "references": [],
-  "featured": true,
+  "featured": false,
   "public": true
 }

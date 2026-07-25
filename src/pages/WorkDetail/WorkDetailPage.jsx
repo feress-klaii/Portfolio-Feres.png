@@ -2,6 +2,7 @@ import WorkCard from "../../components/WorkCard/WorkCard";
 import ThemeToggle from "../../components/ThemeToggle/ThemeToggle";
 import { useView } from "../../motion/ViewContext";
 import { getWorkById, getCollectionDesigns, getDesignCollections } from "../../data/works";
+import { optimizedImage } from "../../utils/imageUrl";
 import "./WorkDetailPage.css";
 
 function formatDate(iso) {
@@ -46,7 +47,7 @@ function WorkDetailPage({ id }) {
       {!isCollection && (
         <div className="work-detail-images">
           {work.images.map((src) => (
-            <img key={src} src={src} alt={work.title} loading="lazy" />
+            <img key={src} src={optimizedImage(src, { width: 1600 })} alt={work.title} loading="lazy" />
           ))}
         </div>
       )}

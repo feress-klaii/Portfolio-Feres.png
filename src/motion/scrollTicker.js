@@ -1,29 +1,19 @@
 const subscribers = new Set();
-let rafId = null;
-
-function tick() {
-  const scrollY = window.scrollY;
-  subscribers.forEach((fn) => fn(scrollY));
-  rafId = requestAnimationFrame(tick);
-}
-
-function ensureRunning() {
-  if (rafId == null && typeof window !== "undefined") {
-    rafId = requestAnimationFrame(tick);
-  }
-}
 
 /**
- * Subscribe to the real, currently-committed window.scrollY on every
- * animation frame. This is intentionally NOT Lenis's own `scroll`
- * event — that fires on Lenis's internal easing tick, which can
- * momentarily disagree with what the browser has actually painted
- * (Lenis is still driving toward it). Reading window.scrollY directly
- * guarantees whatever moves in response is always exactly in sync
- * with the page the user is looking at — no drift, no snap-correct.
+ * Called once per frame from motion/lenis.js's existing raf loop —
+ * this file must NEVER call requestAnimationFrame itself. Doing so
+ * creates a second, independent, permanently-running per-frame loop
+ * alongside Lenis's own — two unconditional loops competing for the
+ * same 16ms frame budget during active scrolling, a real and
+ * measurable cause of scroll stutter, not a style preference.
  */
+export function tick() {
+  const scrollY = window.scrollY;
+  subscribers.forEach((fn) => fn(scrollY));
+}
+
 export function onScrollY(callback) {
-  ensureRunning();
   subscribers.add(callback);
   callback(window.scrollY);
   return () => subscribers.delete(callback);

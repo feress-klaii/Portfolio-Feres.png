@@ -213,7 +213,7 @@ function SingularityHologram() {
     window.addEventListener("pointerup", onPointerUp);
 
     const clock = new THREE.Clock();
-    let frameId;
+    let frameId = null;
     function animate() {
       const time = clock.getElapsedTime();
       diskMaterial.uniforms.uTime.value = time;
@@ -232,7 +232,22 @@ function SingularityHologram() {
       renderer.render(scene, camera);
       frameId = requestAnimationFrame(animate);
     }
-    animate();
+
+    function startLoop() {
+      if (frameId == null) frameId = requestAnimationFrame(animate);
+    }
+    function stopLoop() {
+      if (frameId != null) {
+        cancelAnimationFrame(frameId);
+        frameId = null;
+      }
+    }
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => { entry.isIntersecting ? startLoop() : stopLoop(); },
+      { threshold: 0 }
+    );
+    visibilityObserver.observe(mount);
+    startLoop();
 
     function resize() {
       const w = mount.clientWidth || 1;
@@ -247,7 +262,8 @@ function SingularityHologram() {
     resize();
 
     return () => {
-      cancelAnimationFrame(frameId);
+      stopLoop();
+      visibilityObserver.disconnect();
       observer.disconnect();
       mount.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);

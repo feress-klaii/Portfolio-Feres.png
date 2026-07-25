@@ -273,7 +273,7 @@ function LiquidOrb() {
     observer.observe(mount);
     resize();
 
-    let frameId;
+    let frameId = null;
     function frame(now) {
       resize();
       const time = now * 0.001;
@@ -310,10 +310,26 @@ function LiquidOrb() {
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       frameId = requestAnimationFrame(frame);
     }
-    frameId = requestAnimationFrame(frame);
+
+    function startLoop() {
+      if (frameId == null) frameId = requestAnimationFrame(frame);
+    }
+    function stopLoop() {
+      if (frameId != null) {
+        cancelAnimationFrame(frameId);
+        frameId = null;
+      }
+    }
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => { entry.isIntersecting ? startLoop() : stopLoop(); },
+      { threshold: 0 }
+    );
+    visibilityObserver.observe(mount);
+    startLoop();
 
     return () => {
-      cancelAnimationFrame(frameId);
+      stopLoop();
+      visibilityObserver.disconnect();
       observer.disconnect();
       canvas.removeEventListener("pointerdown", onPointerDown);
       window.removeEventListener("pointermove", onPointerMove);
